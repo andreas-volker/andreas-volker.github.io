@@ -43,13 +43,14 @@
             h = window.innerHeight + 'px';
         if (body) {
             window.console.log(2);
-            if (!body.style.height)
+            if (!body.style.height) {
                 h = window.screen.height + 'px';
+                window.setTimeout(function() {
+                    window.scrollTo(0, window.screen.height);
+                }, 0);
+            }
             body.style.height = h;
         }
-        window.setTimeout(function() {
-            window.scrollTo(0, body.style.height);
-        }, 0);
     };
     NEUA.main = function main(window, document, NEUA, undefined) {
         window.addEventListener('resize', NEUA.on.resize, false);

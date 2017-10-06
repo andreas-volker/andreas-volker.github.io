@@ -41,8 +41,11 @@
     NEUA.on.resize = function() {
         var body = document.body,
             h = Math.min(window.innerHeight, window.screen.height) + 'px';
+        console.log(h);
         if (body) {
             window.console.log(2);
+            if(!body.style.height)
+                h = window.screen.height + 'px';
             body.style.height = h;
             body = body.parentNode;
             if (body)

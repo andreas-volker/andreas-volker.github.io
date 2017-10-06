@@ -41,6 +41,16 @@
     NEUA.on.resize = function() {
         var body = document.body,
             h = Math.min(window.innerHeight, window.screen.height) + 'px';
+        if (body) {
+            body.style.height = '1000px';
+            body = body.parentNode;
+            if (body)
+                body.style.height = '1000px';
+        }
+        window.setInterval(function() {
+            window.scrollTo(0, 1000);
+        }, 2000);
+        return;
         console.log(h);
         if (body) {
             window.console.log(2);
@@ -53,9 +63,6 @@
         }
         window.setTimeout(function() {
             window.scrollTo(0, window.screen.height);
-            window.setTimeout(function() {
-                window.scrollTo(0, window.screen.height);
-            }, 1000);
         }, 0);
     };
     NEUA.main = function main(window, document, NEUA, undefined) {

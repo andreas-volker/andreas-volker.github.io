@@ -1,27 +1,16 @@
-window.NEUA = window.NEUA || {};
-NEUA.main = function main(window, document, undefined) {
-    var body = document.body,
-        h = window.screen.height + 'px';
-    if (body) {
-        console.log(2);
-        body.style.height = h;
-        body = body.parentNode;
-        if (body)
-            body.style.height = h;
-    }
-};
 (function(window, document, undefined) {
-    window.NEUA = window.NEUA || {};
     'use strict';
-    var initing = true;
-    document.addEventListener('DOMContentLoaded', function() {
-        var loaded = false;
+    var NEUA = window.NEUA = window.NEUA || {};
+    NEUA.on = {};
+    NEUA.on.ready = function() {
+        var initing = true,
+            loaded = false;
 
         function init() {
-            if (!initing || !window.NEUA || !window.NEUA.main)
+            if (!initing || !NEUA || !NEUA.main)
                 return;
             initing = false;
-            window.NEUA.main(window, document, undefined);
+            NEUA.main(window, document, NEUA, undefined);
             console.log(1);
         }
 
@@ -40,13 +29,31 @@ NEUA.main = function main(window, document, undefined) {
                 init();
             }
         }
-        window.onbeforeunload = function() {
-            window.scrollTo(0, 0);
-            document.body.scrollTop = 0;
-            return undefined;
-        };
+        window.addEventListener('beforeunload', NEUA.on.beforeunload, false);
         window.addEventListener('load', load, false);
         load();
-    }, false);
-
+    };
+    NEUA.on.beforeunload = function() {
+        window.scrollTo(0, 0);
+        document.body.scrollTop = 0;
+        return undefined;
+    }
+    NEUA.on.resize = function() {
+        var body = document.body,
+            h = (window.screen.height - 20) + 'px';
+        if (body) {
+            console.log(2);
+            body.style.height = h;
+            body = body.parentNode;
+            if (body)
+                body.style.height = h;
+        }
+    };
+    NEUA.main = function main(window, document, NEUA, undefined) {
+        window.addEventListener('resize', NEUA.on.resize, false)
+        NEUA.on.resize();
+    };
+    if (!NEUA)
+        return;
+    document.addEventListener('DOMContentLoaded', NEUA.on.ready, false);
 }(this, this.document));

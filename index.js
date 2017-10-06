@@ -51,6 +51,7 @@
     };
     NEUA.main = function main(window, document, NEUA, undefined) {
         window.addEventListener('resize', NEUA.on.resize, false)
+        window.addEventListener('orientationchange', NEUA.on.resize, false)
         NEUA.on.resize();
     };
     if (!NEUA)

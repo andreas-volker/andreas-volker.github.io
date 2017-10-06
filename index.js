@@ -11,7 +11,7 @@
                 return;
             initing = false;
             NEUA.main(window, document, NEUA, undefined);
-            console.log(1);
+            window.console.log(1);
         }
 
         function load() {
@@ -37,21 +37,24 @@
         window.scrollTo(0, 0);
         document.body.scrollTop = 0;
         return undefined;
-    }
+    };
     NEUA.on.resize = function() {
         var body = document.body,
-            h = (window.screen.height - 20) + 'px';
+            h = Math.min(window.innerHeight, window.screen.height) + 'px';
         if (body) {
-            console.log(2);
+            window.console.log(2);
             body.style.height = h;
             body = body.parentNode;
             if (body)
                 body.style.height = h;
         }
+        window.setTimeout(function() {
+            window.scrollTo(0, window.screen.height);
+        }, 0);
     };
     NEUA.main = function main(window, document, NEUA, undefined) {
-        window.addEventListener('resize', NEUA.on.resize, false)
-        window.addEventListener('orientationchange', NEUA.on.resize, false)
+        window.addEventListener('resize', NEUA.on.resize, false);
+        window.addEventListener('orientationchange', NEUA.on.resize, false);
         NEUA.on.resize();
     };
     if (!NEUA)

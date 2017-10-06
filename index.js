@@ -44,7 +44,7 @@
         console.log(h);
         if (body) {
             window.console.log(2);
-            if(!body.style.height)
+            if (!body.style.height)
                 h = window.screen.height + 'px';
             body.style.height = h;
             body = body.parentNode;
@@ -53,6 +53,9 @@
         }
         window.setTimeout(function() {
             window.scrollTo(0, window.screen.height);
+            window.setTimeout(function() {
+                window.scrollTo(0, window.screen.height);
+            }, 1000);
         }, 0);
     };
     NEUA.main = function main(window, document, NEUA, undefined) {

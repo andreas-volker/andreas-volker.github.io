@@ -11,7 +11,6 @@
                 return;
             initing = false;
             NEUA.main(window, document, NEUA, undefined);
-            window.console.log(1);
         }
 
         function load() {
@@ -29,7 +28,7 @@
                 init();
             }
         }
-        window.addEventListener('beforeunload', NEUA.on.beforeunload, false);
+        // window.addEventListener('beforeunload', NEUA.on.beforeunload, false);
         window.addEventListener('load', load, false);
         load();
     };
@@ -42,7 +41,6 @@
         var body = document.body,
             h = window.innerHeight + 'px';
         if (body) {
-            window.console.log(2);
             if (!body.style.height) {
                 h = window.screen.height + 'px';
                 window.setTimeout(function() {
@@ -53,9 +51,9 @@
         }
     };
     NEUA.main = function main(window, document, NEUA, undefined) {
-        window.addEventListener('resize', NEUA.on.resize, false);
-        window.addEventListener('orientationchange', NEUA.on.resize, false);
-        NEUA.on.resize();
+        // window.addEventListener('resize', NEUA.on.resize, false);
+        // window.addEventListener('orientationchange', NEUA.on.resize, false);
+        // NEUA.on.resize();
     };
     if (!NEUA)
         return;

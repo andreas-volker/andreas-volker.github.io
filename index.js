@@ -7,36 +7,35 @@
     NEUA.on = {};
     NEUA.on.ready = function() {
         var loaded = false,
-            evt = document.createEvent('Event');
-        window.onbeforeunload = NEUA.on.beforeunload;
-        window.addEventListener('load', function() {
-            if (document.readyState !== 'complete' && !loaded)
-                return;
-            var init = function() {
-                    if (loaded && (!NEUA || !NEUA.main))
-                        return;
-                    loaded = undefined;
-                    resize();
-                    NEUA.main(window, document, NEUA, undefined);
-                },
-                resize = function() {
-                    window.addEventListener('resize', NEUA.on.resize, false);
-                    window.addEventListener('orientationchange', NEUA.on.resize, false);
-                    NEUA.on.resize();
-                };
-            loaded = true;
-            if (window.location.hash) {
-                window.setTimeout(function() {
-                    NEUA.utils.fixScroll();
+            load = function() {
+                if (document.readyState !== 'complete' && !loaded)
+                    return;
+                var init = function() {
+                        if (loaded && (!NEUA || !NEUA.main))
+                            return;
+                        loaded = undefined;
+                        resize();
+                        NEUA.main(window, document, NEUA, undefined);
+                    },
+                    resize = function() {
+                        window.addEventListener('resize', NEUA.on.resize, false);
+                        window.addEventListener('orientationchange', NEUA.on.resize, false);
+                        NEUA.on.resize();
+                    };
+                loaded = true;
+                if (window.location.hash) {
+                    window.setTimeout(function() {
+                        NEUA.utils.fixScroll();
+                        init();
+                    }, 0);
+                } else {
+                    window.location.hash = '';
                     init();
-                }, 0);
-            } else {
-                window.location.hash = '';
-                init();
-            }
-        }, false);
-        evt.initEvent('load', false, false);
-        window.dispatchEvent(evt);
+                }
+            };
+        window.onbeforeunload = NEUA.on.beforeunload;
+        window.addEventListener('load', load, false);
+        load();
     };
     NEUA.on.beforeunload = function() {
         NEUA.utils.fixScroll();

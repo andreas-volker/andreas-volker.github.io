@@ -3,21 +3,19 @@
     var NEUA = (window.NEUA = (window.NEUA || {}));
     NEUA.on = {};
     NEUA.on.ready = function() {
-        var initing = true,
-            loaded = false;
-
-        function init() {
-            if (!initing || !NEUA || !NEUA.main)
-                return;
-            initing = false;
-            NEUA.main(window, document, NEUA, undefined);
-            console.log('initing');
-        }
-
-        function load() {
+        var loaded = false,
+            ev = new Event('load', null);
+        window.onbeforeunload = NEUA.on.beforeunload;
+        window.addEventListener('load', function() {
             if (document.readyState !== 'complete' && !loaded)
                 return;
-            console.log('loaded');
+
+            function init() {
+                if (loaded && (!NEUA || !NEUA.main))
+                    return;
+                loaded = undefined;
+                NEUA.main(window, document, NEUA, undefined);
+            }
             loaded = true;
             if (window.location.hash) {
                 window.setTimeout(function() {
@@ -29,10 +27,8 @@
                 window.location.hash = '';
                 init();
             }
-        }
-        window.onbeforeunload = NEUA.on.beforeunload;
-        window.addEventListener('load', load, false);
-        load();
+        }, false);
+        document.dispatchEvent(ev);
     };
     NEUA.on.beforeunload = function() {
         console.log('beforeunload');
@@ -40,8 +36,7 @@
         document.body.scrollTop = 0;
         return null;
     };
-    NEUA.on.resize = function() {
-    };
+    NEUA.on.resize = function() {};
     NEUA.main = function main(window, document, NEUA, undefined) {
         window.addEventListener('resize', NEUA.on.resize, false);
         window.addEventListener('orientationchange', NEUA.on.resize, false);

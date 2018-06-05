@@ -5,6 +5,11 @@
         //INICIA APENAS APÓS DOMContentLoaded
     };
     NEUA.on = {};
+    NEUA.on.resize = function() {};
+    NEUA.on.beforeunload = function() {
+        NEUA.utils.fixScroll();
+        return null;
+    };
     NEUA.on.ready = function() {
         var loaded = false,
             load = function() {
@@ -37,11 +42,6 @@
         window.addEventListener('load', load, false);
         load();
     };
-    NEUA.on.beforeunload = function() {
-        NEUA.utils.fixScroll();
-        return null;
-    };
-    NEUA.on.resize = function() {};
     NEUA.utils = {};
     NEUA.utils.fixScroll = function() {
         window.scrollTo(0, 0);

@@ -1,0 +1,13 @@
+#ff9ab9 pink
+
+#f3ffb3 yellow
+
+#8ff6ff blue
+
+#b9b1dd purple
+
+#dbc1dd lilac
+
+#6b3e26 brown
+
+#4f372d dark brown

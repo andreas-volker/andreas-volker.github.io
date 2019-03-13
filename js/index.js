@@ -1,51 +1,61 @@
-(function(window, document, undefined) {
+(function MAIN(GLOBAL) {
     'use strict';
-    var NEUA = (window.NEUA = (window.NEUA || {}));
-    NEUA.main = function main(window, document, NEUA, undefined) {
-        //INICIA APENAS APÓS DOMContentLoaded
+    var self = this,
+        _ = GLOBAL;
+    _.init(function() {
+        console.log('dom loaded');
+    });
+    document.addEventListener('DOMContentLoaded', _.DOMContentLoaded, false);
+}((function(window, document, undefined) {
+    var ret = {
+        on: {
+            resize: [function() {}]
+            beforeunload: []
+        },
+        fix: {
+            bug: {},
+            reset: {}
+        },
+        util: {
+            mid: {}
+            vendor: {}
+        }
     };
-    NEUA.on = {};
-    NEUA.on.resize = function() {};
-    NEUA.on.beforeunload = function() {
-        NEUA.utils.fixScroll();
-        return null;
+    ret.init = function init(cb) {
+        if (typeof cb === 'function') {
+            ret.init.cb = cb;
+            // window.addEventListener('resize', ret.on.resize, false);
+            // window.addEventListener('orientationchange', ret.util.addOn('resize'), false);
+            // ret.util.on('resize');
+
+        } else if (!ret.init.cb) {} else
+            ret.init.cb();
     };
-    NEUA.on.ready = function() {
+    ret.DOMContentLoaded = function() {
         var loaded = false,
             load = function() {
                 if (document.readyState !== 'complete' && !loaded)
                     return;
-                var init = function() {
-                        if (loaded && (!NEUA || !NEUA.main))
-                            return;
-                        loaded = undefined;
-                        resize();
-                        NEUA.main(window, document, NEUA, undefined);
-                    },
-                    resize = function() {
-                        window.addEventListener('resize', NEUA.on.resize, false);
-                        window.addEventListener('orientationchange', NEUA.on.resize, false);
-                        NEUA.on.resize();
-                    };
+                if (loaded || !(ret && ret.init && ret.init.cb))
+                    return;
                 loaded = true;
-                if (window.location.hash) {
-                    window.setTimeout(function() {
-                        NEUA.utils.fixScroll();
-                        init();
-                    }, 0);
-                } else {
-                    window.location.hash = '';
-                    init();
-                }
+                window.setTimeout(function() {
+                    loaded = undefined;
+                    ret.fix.reset.scroll();
+                    ret.init();
+                }, 0);
             };
-        window.onbeforeunload = NEUA.on.beforeunload;
+        window.onbeforeunload = ret.on.beforeunload;
         window.addEventListener('load', load, false);
         load();
     };
-    NEUA.utils = {};
-    NEUA.utils.fixScroll = function() {
+    ret.on.beforeunload.push(function() {
+        ret.fix.reset.scroll();
+        return null;
+    });
+    ret.fix.reset.scroll = function() {
         window.scrollTo(0, 0);
         document.body.scrollTop = 0;
+        document.body.scrollLeft = 0;
     };
-    document.addEventListener('DOMContentLoaded', NEUA.on.ready, false);
-}(this, this.document));
+}(self, self.document))));

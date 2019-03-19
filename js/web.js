@@ -3,13 +3,15 @@
     var self = this,
         _ = GLOBAL;
     _.init(function() {
-        console.log('dom loaded');
+        window.console.log('dom loaded');
     });
     document.addEventListener('DOMContentLoaded', _.DOMContentLoaded, false);
+    return self;
 }((function(window, document, undefined) {
+    'use strict';
     var ret = {
         on: {
-            resize: [function() {}]
+            resize: [function() {}],
             beforeunload: []
         },
         fix: {
@@ -17,7 +19,7 @@
             reset: {}
         },
         util: {
-            mid: {}
+            mid: {},
             vendor: {}
         }
     };
@@ -58,4 +60,5 @@
         document.body.scrollTop = 0;
         document.body.scrollLeft = 0;
     };
-}(self, self.document))));
+    return ret;
+}(this, this.document))));

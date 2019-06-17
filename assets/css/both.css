@@ -2,28 +2,32 @@
     text-align: center;
 }
 
-.resume span {
+.resume .text {
     color: #444;
 }
 .resume .text {
-	font-size: 0.8rem;
+	font-size: 1rem;
+}
+
+.resume .text > span {
+	color: #777;
 }
 
 .resume .flex {
 	white-space: nowrap;
 	display : inline-flex;
 }
-
+.resume ul .flex {
+	max-width: 33%;
+}
 .resume .flex > span,
 .resume .flex.right {
 	text-align: right;
 	padding-right: 1rem;
-	max-width: 50%;
 }
 .resume .flex > span + span,
 .resume .flex.left {
 	padding-left: 1rem;
-	max-width: 50%;
 	text-align: left;
 }
 

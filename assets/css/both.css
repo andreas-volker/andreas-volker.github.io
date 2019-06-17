@@ -1,0 +1,46 @@
+.resume {
+    text-align: center;
+}
+
+.resume span {
+    color: #444;
+}
+.resume .text {
+	font-size: 0.8rem;
+}
+
+.resume .flex {
+	white-space: nowrap;
+	display : inline-flex;
+}
+
+.resume .flex > span,
+.resume .flex.right {
+	text-align: right;
+	padding-right: 1rem;
+	max-width: 50%;
+}
+.resume .flex > span + span,
+.resume .flex.left {
+	padding-left: 1rem;
+	max-width: 50%;
+	text-align: left;
+}
+
+.title {
+	width: 100%;
+	display: block;
+    font-size: 2rem;
+    padding-top: 1rem;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    padding: 1rem 0 0;
+    display: block;
+}
+
+.resume ul {
+	max-width: 70rem;
+	margin: 0 auto 1rem;
+}

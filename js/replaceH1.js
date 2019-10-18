@@ -3,11 +3,14 @@
     var self = this,
         _ = GLOBAL;
     _.init(function() {
-        var el = _.doc.querySelector('h1');
+        var nome = 'h1.html',
+            el = _.doc.querySelector('h1');
+        if(/en/.test(window.location.search))
+            nome = 'h1_en.html'
         if (!el)
             return;
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'h1.html', true);
+        xhr.open('GET', nome, true);
         xhr.onreadystatechange = function() {
             var self = this;
             if (self.readyState === 4) {

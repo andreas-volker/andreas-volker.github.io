@@ -3,10 +3,10 @@
     var self = this,
         _ = GLOBAL;
     _.init(function() {
-        var nome = 'h1.html',
+        var nome = './h1.html',
             el = _.doc.querySelector('h1');
         if(/en/.test(window.location.search))
-            nome = 'h1_en.html'
+            nome = './h1_en.html'
         if (!el)
             return;
         var xhr = new XMLHttpRequest();

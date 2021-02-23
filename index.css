@@ -1,4 +1,4 @@
-@import "/assets/css/reset.css";
-@import "/assets/css/both.css";
-@import "/assets/css/landscape.css";
-@import "/assets/css/portrait.css";
+@import "./assets/css/reset.css";
+@import "./assets/css/both.css";
+@import url("./assets/css/landscape.css") (min-width: 501px);
+@import url("./assets/css/portrait.css") (max-width: 500px);

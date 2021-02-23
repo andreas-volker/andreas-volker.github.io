@@ -1,0 +1,9 @@
+.flex {
+    white-space: initial !important;
+    text-align: center;
+    display: block;
+}
+
+.resume {
+	line-height: 1.2;
+}
